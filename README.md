@@ -2,7 +2,7 @@
 
 This project is a skeleton (base structure) of a test framework for automated UI testing using [Playwright](https://playwright.dev/). It is built using the Page Object Model (POM) pattern and contains ready-to-use configurations for writing, executing, and maintaining automated tests efficiently.
 
-## 📦 Installing Dependencies
+## Installing Dependencies
 
 Before starting, ensure that Node.js is installed. To download all necessary packages, run the following command in the terminal:
 
@@ -15,7 +15,7 @@ If the browsers required for Playwright are not installed automatically, run:
 npx playwright install
 ```
 
-## 🚀 Running Tests
+## Running Tests
 
 To execute all tests in headless mode (without opening a browser window), use the base command:
 
@@ -29,7 +29,7 @@ npx playwright test
 - `npx playwright test --project=chromium` — runs tests only for a specific browser.
 - `npx playwright show-report` — opens the generated HTML test report after execution.
 
-## 📂 Project Structure
+## Project Structure
 
 The project is structured to separate UI interaction logic, configuration, and the tests themselves:
 
@@ -38,6 +38,3 @@ The project is structured to separate UI interaction logic, configuration, and t
 - **`fixtures/`** — custom Playwright fixtures. These are used to set up the state before a test (e.g., initializing pages, quick authorization) and make test code shorter and cleaner.
 - **`tests/`** — the directory containing the actual test files (`*.spec.ts` scripts).
 - **`utils/`** — helper functions and utilities. This includes tools for working with environment variables (`env.ts`), generating random data, formatting, etc.
-
----
-💡 **Important:** Before running the tests, copy the `.env.example` file, rename it to `.env`, and fill in your actual configuration data (URL, credentials, etc.).
