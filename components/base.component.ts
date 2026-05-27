@@ -1,3 +1,11 @@
-export class BasePage {
+import { Page, Locator } from '@playwright/test';
 
+export abstract class BaseComponent {
+    protected page: Page;
+    protected root: Locator;
+
+    constructor(page: Page, root: Locator) {
+        this.page = page;
+        this.root = root;
+    }
 }

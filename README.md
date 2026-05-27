@@ -1,43 +1,78 @@
-# GreenCity Playwright Framework
+# GreenCity UI Automation Testing
 
-This project is a skeleton (base structure) of a test framework for automated UI testing using [Playwright](https://playwright.dev/). It is built using the Page Object Model (POM) pattern and contains ready-to-use configurations for writing, executing, and maintaining automated tests efficiently.
+[![Allure Report](https://img.shields.io/badge/Allure%20Report-View-blue)](https://afreekan.github.io/greencity-playwright/)
 
-## 📦 Installing Dependencies
+Проєкт автоматизації тестування для вебдодатка [GreenCity](https://www.greencity.cx.ua/#/greenCity) на базі Playwright, TypeScript та Node.js. 
+Побудований з використанням Page Object Model (POM) та Component-Based Approach.
 
-Before starting, ensure that Node.js is installed. To download all necessary packages, run the following command in the terminal:
+## Структура проєкту
 
-```bash
-npm install
-```
+- `pages/` — Page Objects для сторінок (напр., `EcoNewsPage.ts`, `CreateNewsPage.ts`).
+- `components/` — Компоненти сторінок, що повторюються (напр., `Header.ts`, `CancelModal.ts`).
+- `tests/` — Специфікації тестів з тестовими сценаріями (напр., `eco-news.spec.ts`).
+- `utils/` — Допоміжні утиліти (робота з `.env` тощо).
+- `playwright.config.ts` — Конфігурація Playwright (baseURL, репортери, браузери).
+- `.github/workflows/` — Налаштування CI/CD для GitHub Actions.
 
-If the browsers required for Playwright are not installed automatically, run:
-```bash
-npx playwright install
-```
+## Встановлення та розгортання
 
-## 🚀 Running Tests
+1. **Клонуйте репозиторій та перейдіть у папку проєкту:**
+   ```bash
+   git clone <repository_url>
+   cd greencity-playwright
+   ```
 
-To execute all tests in headless mode (without opening a browser window), use the base command:
+2. **Встановіть залежності (Node.js пакети):**
+   ```bash
+   npm install
+   ```
 
+3. **Встановіть браузери для Playwright:**
+   ```bash
+   npx playwright install
+   ```
+
+4. **Налаштуйте змінні середовища:**
+   Перейменуйте або скопіюйте файл `.env.example` у `.env`. 
+   Переконайтесь, що параметр `BASE_URL` має значення `https://www.greencity.cx.ua/#/greenCity`.
+
+## Запуск тестів
+
+Запустити всі тести у headless-режимі (фоновий режим):
 ```bash
 npx playwright test
 ```
 
-**Other useful commands:**
-- `npx playwright test --ui` — runs tests in the interactive Playwright UI mode.
-- `npx playwright test --headed` — runs tests in headed mode (visually showing the browser window).
-- `npx playwright test --project=chromium` — runs tests only for a specific browser.
-- `npx playwright show-report` — opens the generated HTML test report after execution.
+Запустити тести з відкриттям вікна браузера (UI-режим):
+```bash
+npx playwright test --ui
+```
 
-## 📂 Project Structure
+Запустити тести у видимому режимі звичайного виконання (headed mode):
+```bash
+npx playwright test --headed
+```
 
-The project is structured to separate UI interaction logic, configuration, and the tests themselves:
+Запустити тести лише в конкретному браузері (наприклад, Chromium):
+```bash
+npx playwright test --project=chromium
+```
 
-- **`pages/`** — contains Page Object Model (POM) classes. Each file describes a specific page of the application, its locators (elements), and interaction methods.
-- **`components/`** — contains classes for reusable UI components that might appear across multiple pages (e.g., header, footer, modals, navigation menus).
-- **`fixtures/`** — custom Playwright fixtures. These are used to set up the state before a test (e.g., initializing pages, quick authorization) and make test code shorter and cleaner.
-- **`tests/`** — the directory containing the actual test files (`*.spec.ts` scripts).
-- **`utils/`** — helper functions and utilities. This includes tools for working with environment variables (`env.ts`), generating random data, formatting, etc.
+## Звіти (Allure Report)
 
----
-💡 **Important:** Before running the tests, copy the `.env.example` file, rename it to `.env`, and fill in your actual configuration data (URL, credentials, etc.).
+Проєкт інтегровано з Allure Report. Після виконання тестів, результати зберігаються в папці `allure-results`.
+
+Щоб згенерувати звіт на основі результатів:
+```bash
+npx allure generate ./allure-results --clean
+```
+
+Щоб відкрити згенерований звіт:
+```bash
+npx allure open ./allure-report
+```
+
+## Написання тестів
+- Використовуйте `test.step()` для логування кроків у звіти Allure.
+- усі селектори мають знаходитись у `pages/` або `components/`.
+- Використовуйте типізацію TypeScript.
